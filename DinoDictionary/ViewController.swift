@@ -141,6 +141,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
+        //textView의 컨텐츠 설정
         var content = cell.defaultContentConfiguration()
         content.text = dinoNames[indexPath.row]
         cell.contentConfiguration = content
@@ -176,9 +177,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             destinationVc.selectDinoImage = chosenDinoImage
             destinationVc.selectDinoDescripton = chosenDinoDesc
         }
-        
-
-        
     }
+    
+    /*
+     tableView row delete
+     */
+    //tableView - commit
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.dinoNames.remove(at: indexPath.row)
+            self.dinoImages.remove(at: indexPath.row)
+            self.dinoDesc.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    
+    
+    
 }
 
